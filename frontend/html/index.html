@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Note</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/css/index.css">
+</head>
+
+<body>
+
+    <!-- 主画布 -->
+    <div class="canvas" id="canvas">
+        <div class="messages" id="messages"></div>
+    </div>
+
+
+    <!-- 输入区 -->
+    <div class="input-area" id="inputArea">
+        <textarea id="noteInput" placeholder="写下你的想法..." rows="1"></textarea>
+        <button class="submit-btn" id="submitBtn">写下</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="save-toast" id="saveToast">已保存</div>
+    <script src="/frontend/js/index.js"></script>
+</body>
+
+</html>
