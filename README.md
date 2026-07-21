@@ -25,7 +25,7 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/你的用户名/smart-note-agent.git
+git clone https://github.com/Sandroey/smart-note-agent.git
 cd smart-note-agent
 ```
 ### 2. 安装依赖
