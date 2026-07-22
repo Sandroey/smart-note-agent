@@ -14,7 +14,7 @@
 }
 
 body {
-    font-family: 'Noto Serif SC', 'Georgia', serif;
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     height: 100vh;
@@ -60,17 +60,25 @@ body {
 /* ===== 消息 ===== */
 
 .message {
-    opacity: 0;
-    transform: translateY(16px);
-    animation: msgIn 0.5s ease forwards;
+    opacity: 1;
+    transform: translateY(0);
     position: absolute;
     cursor: grab;
     transition: box-shadow 0.2s ease;
-    max-width: 400px;
     background: var(--surface);
     border-radius: 8px;
-    padding: 16px;
+    padding: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.msg-animate-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: msgIn 0.5s ease forwards;
 }
 
 .message:hover {
@@ -90,14 +98,18 @@ body {
 }
 
 .message-bubble {
-    padding: 16px 0;
-    font-size: 20px;
+    padding: 0;
+    font-size: 14px;
     font-weight: 300;
-    line-height: 2;
+    line-height: 1.6;
     letter-spacing: 0.05em;
     cursor: default;
     transition: opacity 0.2s ease;
     position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 /* 用户消息 — 右对齐 */
@@ -129,6 +141,10 @@ body {
 /* 逐字出现 */
 .char {
     display: inline;
+    opacity: 1;
+}
+
+.char-animate {
     opacity: 0;
     animation: charIn 0.4s ease forwards;
 }
@@ -162,89 +178,34 @@ body {
     }
 }
 
-/* ===== 悬浮操作菜单 ===== */
+/* ===== 删除按钮（右上角×） ===== */
 
-.msg-actions {
+.msg-delete-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
     display: flex;
-    gap: 4px;
-    justify-content: flex-end;
-    margin-top: 10px;
-    opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: all 0.3s ease;
-    height: 0;
-    overflow: hidden;
-}
-
-.message.user .msg-actions {
-    justify-content: flex-end;
-}
-
-.message.ai .msg-actions {
-    justify-content: flex-start;
-}
-
-.msg-actions.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    height: auto;
-}
-
-.msg-btn {
-    padding: 4px 16px;
-    border: 1px solid #e0e0e0;
-    background: var(--surface);
-    border-radius: 6px;
-    font-size: 12px;
-    font-family: 'Noto Serif SC', serif;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #999;
     cursor: pointer;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    transition: all 0.2s ease;
-}
-
-.msg-btn-save {
-    color: var(--accent);
-    border-color: transparent;
-}
-
-.msg-btn-save:hover {
-    background: var(--accent);
-    color: white;
-}
-
-.msg-btn-discard:hover {
-    color: #666;
-    border-color: #bbb;
-}
-
-/* ===== 删除按钮 ===== */
-
-.msg-delete {
-    display: flex;
-    gap: 4px;
-    justify-content: flex-end;
-    margin-top: 10px;
+    border-radius: 50%;
     opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: all 0.3s ease;
-    height: 0;
-    overflow: hidden;
+    transition: all 0.2s ease;
+    z-index: 20;
+    line-height: 1;
 }
 
-.msg-delete.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    height: auto;
-}
-
-.msg-btn-delete {
+.msg-delete-btn:hover {
     color: #dc3545;
-    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.msg-delete-btn.show {
+    opacity: 1;
 }
 
 .msg-btn-delete:hover {
@@ -294,7 +255,7 @@ body {
     border-radius: 0;
     padding: 14px 4px;
     font-size: 17px;
-    font-family: 'Noto Serif SC', serif;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
     font-weight: 300;
     background: transparent;
     color: var(--text);
@@ -321,7 +282,7 @@ body {
     border: none;
     border-radius: 4px;
     font-size: 13px;
-    font-family: 'Noto Serif SC', serif;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
     cursor: pointer;
     letter-spacing: 0.12em;
     transition: opacity 0.3s;
@@ -552,4 +513,14 @@ body {
     30% {
         transform: translateY(-6px);
     }
+}
+
+/* ===== 独立加载指示器 ===== */
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
